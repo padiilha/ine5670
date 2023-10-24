@@ -1,9 +1,6 @@
 const Usuario = require("../models/usuario");
 
-export const create = (nome, cpf, email, telefone) => {};
-
-export const read = (id) => {};
-
-export const update = (id, nome, cpf, email, telefone) => {};
-
-export const remove = (id) => {};
+const create = (nome, cpf, email, telefone) => {};
+const read = (id) => {};
+const update = (id, nome, cpf, email, telefone) => {};
+const remove = (id) => {};

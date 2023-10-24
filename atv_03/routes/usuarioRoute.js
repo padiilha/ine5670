@@ -8,7 +8,6 @@ router.get("/:id", async (req, res) => {
 
   res.json(usuario);
 });
-nome;
 
 router.post("/new", async (req, res) => {
   const usuario = UsuarioService.create(
