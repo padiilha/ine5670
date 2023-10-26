@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
+const database = "patinetes"
 
 require("dotenv").config();
 
 async function connect() {
   try {
-    await mongoose.connect(process.env.DB_URL);
-    console.log("Connected to MongoDB");
+    await mongoose.connect(`${process.env.DB_URI}/${database}`);
+    console.log(`Connected to MongoDB -> ${database}`);
   } catch (e) {
     console.error(e);
   }

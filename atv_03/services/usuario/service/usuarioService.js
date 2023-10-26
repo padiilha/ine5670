@@ -1,4 +1,5 @@
-const Usuario = require("../models/usuario");
+require("../model/db-connection");
+const Usuario = require("../model/usuario");
 
 const create = (nome, cpf, email, telefone) => {};
 const read = (id) => {};
