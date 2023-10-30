@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const UsuarioService = require("../service/usuarioService");
+const UsuarioService = require("../services/usuario/usuarioService");
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", (req, res) => {
   const usuario = UsuarioService.read(req.params.id);
 
   res.json(usuario);
 });
 
-router.post("/new", async (req, res) => {
+router.post("/new", (req, res) => {
   const usuario = UsuarioService.create(
     req.body.nome,
     req.body.cpf,
@@ -20,7 +20,7 @@ router.post("/new", async (req, res) => {
   res.json(usuario);
 });
 
-router.put("/update/:id", async (req, res) => {
+router.put("/:id", (req, res) => {
   const usuario = UsuarioService.update(
     req.params.id,
     req.body.nome,
@@ -32,7 +32,7 @@ router.put("/update/:id", async (req, res) => {
   res.json(usuario);
 });
 
-router.delete("remove/:id", async (req, res) => {
+router.delete("/:id", (req, res) => {
   const result = UsuarioService.remove(req.params.id);
 
   res.json(result);

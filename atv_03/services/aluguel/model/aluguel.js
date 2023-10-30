@@ -10,8 +10,8 @@ const AluguelSchema = new Schema({
       type: String,
       require: false,
     },
-    st_patinete: {
-      type: Boolean,
+    serial: {
+      type: String,
       require: true,
     },
 });
