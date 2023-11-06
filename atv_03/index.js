@@ -1,17 +1,18 @@
-require("dotenv").config();
+import { config } from 'dotenv';
+import express from 'express';
+import aluguelRouter from './routes/aluguelRoute.js';
+import pagamentoRouter from './routes/pagamentoRoute.js';
+import patineteRouter from './routes/patineteRoute.js';
+import usuarioRouter from './routes/usuarioRoute.js';
 
-const express = require("express");
+config();
+
 const app = express();
 
-const aluguelRoutes = require("./routes/aluguelRoute");
-const pagamentoRoutes = require("./routes/pagamentoRoute");
-const patineteRoutes = require("./routes/patineteRoute");
-const usuarioRoutes = require("./routes/usuarioRoute");
-
 app.use(express.json());
-app.use("/aluguel", aluguelRoutes);
-app.use("/pagamento", pagamentoRoutes);
-app.use("/patinete", patineteRoutes);
-app.use("/usuario", usuarioRoutes);
+app.use("/aluguel", aluguelRouter );
+app.use("/pagamento", pagamentoRouter);
+app.use("/patinete", patineteRouter);
+app.use("/usuario", usuarioRouter);
 
 app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`));

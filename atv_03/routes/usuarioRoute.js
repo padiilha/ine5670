@@ -1,16 +1,16 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express';
+import { create, read, remove, update } from '../services/usuario/usuarioService.js';
 
-const UsuarioService = require("../services/usuario/usuarioService");
+const usuarioRouter = express.Router();
 
-router.get("/:id", (req, res) => {
-  const usuario = UsuarioService.read(req.params.id);
+usuarioRouter.get("/:id", async (req, res) => {
+  const usuario = await read(req.params.id);
 
   res.json(usuario);
 });
 
-router.post("/new", (req, res) => {
-  const usuario = UsuarioService.create(
+usuarioRouter.post("/new", (req, res) => {
+  const usuario = create(
     req.body.nome,
     req.body.cpf,
     req.body.email,
@@ -20,8 +20,8 @@ router.post("/new", (req, res) => {
   res.json(usuario);
 });
 
-router.put("/:id", (req, res) => {
-  const usuario = UsuarioService.update(
+usuarioRouter.put("/:id", (req, res) => {
+  const usuario = update(
     req.params.id,
     req.body.nome,
     req.body.cpf,
@@ -32,10 +32,10 @@ router.put("/:id", (req, res) => {
   res.json(usuario);
 });
 
-router.delete("/:id", (req, res) => {
-  const result = UsuarioService.remove(req.params.id);
+usuarioRouter.delete("/:id", (req, res) => {
+  const result = remove(req.params.id);
 
   res.json(result);
 });
 
-module.exports = router;
+export default usuarioRouter;

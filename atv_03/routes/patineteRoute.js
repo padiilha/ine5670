@@ -1,16 +1,16 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express';
+import { create, read, remove, update } from '../services/patinete/patineteService.js';
 
-const PatineteService = require("../services/patinete/patineteService");
+const patineteRouter = express.Router();
 
-router.get("/:id", (req, res) => {
-  const patinete = PatineteService.read(req.params.id);
+patineteRouter.get("/:id", async (req, res) => {
+  const patinete = await read(req.params.id);
 
   res.json(patinete);
 });
 
-router.post("/new", (req, res) => {
-  const patinete = PatineteService.create(
+patineteRouter.post("/new", (req, res) => {
+  const patinete = create(
     req.body.serial,
     req.body.st_patinete,
     req.body.latitude,
@@ -20,8 +20,8 @@ router.post("/new", (req, res) => {
   res.json(patinete);
 });
 
-router.put("/:id", (req, res) => {
-  const patinete = PatineteService.update(
+patineteRouter.put("/:id", (req, res) => {
+  const patinete = update(
     req.params.id,
     req.body.st_patinete,
     req.body.latitude,
@@ -31,10 +31,10 @@ router.put("/:id", (req, res) => {
   res.json(patinete);
 });
 
-router.delete("/:id", (req, res) => {
-  const result = PatineteService.remove(req.params.id);
+patineteRouter.delete("/:id", (req, res) => {
+  const result = remove(req.params.id);
 
   res.json(result);
 });
 
-module.exports = router;
+export default patineteRouter;

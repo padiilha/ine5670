@@ -1,16 +1,16 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express';
+import { create, read, update } from '../services/pagamento/pagamentoService.js';
 
-const pagamentoService = require("../services/pagamento/pagamentoService");
+const pagamentoRouter = express.Router();
 
-router.get("/:id", async (req, res) => {
-  const pagamento = pagamentoService.read(req.params.id);
+pagamentoRouter.get("/:id", async (req, res) => {
+  const pagamento = read(req.params.id);
 
   res.json(pagamento);
 });
 
-router.post("/new", async (req, res) => {
-  const pagamento = pagamentoService.create(
+pagamentoRouter.post("/new", async (req, res) => {
+  const pagamento = create(
     req.body.nome_cartao,
     req.body.numero_cartao,
     req.body.vencimento_cartao,
@@ -21,8 +21,8 @@ router.post("/new", async (req, res) => {
   res.json(pagamento);
 });
 
-router.put("/:id", async (req, res) => {
-  const pagamento = pagamentoService.update(
+pagamentoRouter.put("/:id", async (req, res) => {
+  const pagamento = update(
     req.params.id,
     req.body.st_pagamento
   );
@@ -30,4 +30,4 @@ router.put("/:id", async (req, res) => {
   res.json(pagamento);
 });
 
-module.exports = router;
+export default pagamentoRouter;

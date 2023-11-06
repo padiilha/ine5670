@@ -1,29 +1,29 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express';
+import api from '../api.js';
+import { create, read, update } from '../services/aluguel/aluguelService.js';
 
-const AluguelService = require("../services/aluguel/aluguelService");
-const api = require("../api")
+const aluguelRouter = express.Router();
 
-router.get("/:id", (req, res) => {
-  const aluguel = AluguelService.read(req.params.id);
+aluguelRouter.get("/:id", async (req, res) => {
+  const aluguel = await read(req.params.id);
 
   res.json(aluguel);
 });
 
-router.post("/new", async (req, res) => {
-  const aluguel = AluguelService.create(
+aluguelRouter.post("/new", async (req, res) => {
+  const aluguel = await create(
     req.body.hora_inicio,
     req.body.hora_fim,
     req.body.serial
   );
 
-  await api.put("/patinete/:id", {"st_patinete": req.body.st_patinete});
+  await api.put(`/patinete/${req.body.id_patinete}`, {"st_patinete": req.body.st_patinete});
 
   res.json(aluguel);
 });
 
-router.put("/:id", async (req, res) => {
-  const aluguel = AluguelService.update(
+aluguelRouter.put("/:id", async (req, res) => {
+  const aluguel = update(
     req.params.id,
     req.body.hora_fim
   );
@@ -39,4 +39,4 @@ router.put("/:id", async (req, res) => {
   res.json(aluguel);
 });
 
-module.exports = router;
+export default aluguelRouter;

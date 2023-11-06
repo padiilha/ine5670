@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 const PatineteSchema = new Schema({
@@ -20,6 +21,4 @@ const PatineteSchema = new Schema({
     },
 });
 
-const Patinete = mongoose.model("Patinete", PatineteSchema);
-
-module.exports = Patinete;
+export const Patinete = mongoose.model("Patinete", PatineteSchema);

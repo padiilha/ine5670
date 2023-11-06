@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 const AluguelSchema = new Schema({
@@ -16,6 +17,4 @@ const AluguelSchema = new Schema({
     },
 });
 
-const Aluguel = mongoose.model("Aluguel", AluguelSchema);
-
-module.exports = Aluguel;
+export const Aluguel = mongoose.model("Aluguel", AluguelSchema);

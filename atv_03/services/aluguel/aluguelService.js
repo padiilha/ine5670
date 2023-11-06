@@ -1,18 +1,20 @@
-require("./model/db-connection");
-const Aluguel = require("./model/aluguel");
+import { Aluguel } from "./model/aluguel.js";
+import { connect } from "./model/db-connection.js";
 
-const create = async (hora_inicio, hora_fim, serial) => {
-  const newAluguel = new Aluguel(hora_inicio, hora_fim, serial)
+connect();
+
+export const create = async (hora_inicio, hora_fim, serial) => {
+  const newAluguel = new Aluguel({hora_inicio, hora_fim, serial})
 
   await newAluguel.save();
 
   return newAluguel;
 };
 
-const read = async (id) => {
+export const read = async (id) => {
   return await Aluguel.findById(id);
 };
 
-const update = async (id, hora_fim) => {
+export const update = async (id, hora_fim) => {
   return await Aluguel.findByIdAndUpdate(id, {hora_fim});
 };

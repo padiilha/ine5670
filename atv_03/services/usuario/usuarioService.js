@@ -1,22 +1,24 @@
-require("./model/db-connection");
-const Usuario = require("./model/usuario");
+import { connect } from "./model/db-connection.js";
+import { Usuario } from "./model/usuario.js";
 
-const create = async (nome, cpf, email, telefone) => {
-  const newUsuario = new Usuario(nome, cpf, email, telefone);
+connect();
+
+export const create = async (nome, cpf, email, telefone) => {
+  const newUsuario = new Usuario({nome, cpf, email, telefone});
   
   await newUsuario.save();
 
   return newUsuario;
 };
 
-const read = async (id) => {
+export const read = async (id) => {
   return await Usuario.findById(id);
 };
 
-const update = async (id, nome, cpf, email, telefone) => {
+export const update = async (id, nome, cpf, email, telefone) => {
   return await Usuario.findByIdAndUpdate(id, {nome, cpf, email, telefone});
 };
 
-const remove = async (id) => {
+export const remove = async (id) => {
   return await Usuario.findByIdAndDelete(id);
 };
